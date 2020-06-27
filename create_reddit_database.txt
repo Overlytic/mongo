@@ -1,0 +1,95 @@
+use reddit_test2;
+
+//delete everything in collections
+
+db.getCollectionNames().forEach( 
+function(collection_name) { 
+db[collection_name].remove({}) 
+});
+
+//delete collections
+
+db.getCollectionNames().forEach( 
+function(collection_name) { 
+db[collection_name].drop() 
+});
+
+// create collections: note this is not required
+// But can also specify a prototype form:
+// https://docs.mongodb.com/manual/reference/method/db.createCollection/ 
+
+db.createCollection('user');
+db.createCollection('subreddit');
+db.createCollection('redditpost');
+db.createCollection('comment');
+
+// Insert Users
+
+db.user.insert([
+{
+	_id : "u/Alice",
+	email : "alice@email.com"
+},
+{
+	_id : "u/Bob",
+	email : "bob@email.com"
+},
+{
+	_id : "u/Charlie",
+	email : "charlie@email.com"
+},
+{
+	_id : "u/EpicModerator",
+	email : "epicmod@email.com"
+},
+{
+	_id : "u/FunnyModerator",
+	email : "funnymod@email.com"
+}
+]);
+
+
+// Insert Subreddits
+
+db.subreddit.insert([
+{
+	_id : "r/explainitlikeim5",
+	moderators: ["u/EpicModerator"]
+},
+{
+	_id : "r/cats",
+	moderators: ["u/FunnyModerator", "u/Alice"]
+},
+{
+	_id : "r/dogs",
+	moderators: ["u/FunnyModerator", "u/Alice"]
+}]);
+
+
+// Insert Subreddits
+
+db.redditpost.insert([
+{
+	user_id : "u/Bob",
+	subreddit_id : "r/explainitlikeim5",
+	title : "What is a database?",
+	message : "I need to explain to my child what a database is without using any technical jargon. Please help!",
+	vote_up : 0,
+	vote_down : 0
+	
+}
+}]);
+
+
+
+// Insert Comments
+
+db.comments.insert([
+{
+	post_id : //TODO		
+}
+]);
+
+
+
+
